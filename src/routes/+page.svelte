@@ -4,6 +4,7 @@
         GoogleAuthProvider,
         onAuthStateChanged,
         signInWithPopup,
+        signOut,
     } from "firebase/auth";
     import {
         addDoc,
@@ -53,6 +54,12 @@
         Login with Google
     </button>
 {:else}
+    <button
+        on:click={async () => {
+            await signOut(auth);
+        }}>logout</button
+    >
+    <br />
     <input type="text" placeholder="todo text" bind:value={todo_text} />
     <button
         on:click={async () => {
