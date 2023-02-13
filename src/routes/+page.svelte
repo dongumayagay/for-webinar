@@ -11,6 +11,7 @@
         doc,
         onSnapshot,
         query,
+        updateDoc,
         where,
     } from "firebase/firestore";
     import { onMount } from "svelte";
@@ -64,7 +65,15 @@
     <ul>
         {#each list_of_todos as todo_item}
             <li>
-                <input type="text" value={todo_item.todo_text} />
+                <input type="text" bind:value={todo_item.todo_text} />
+                <button
+                    on:click={async () => {
+                        await updateDoc(doc(db, "todos", todo_item.id), {
+                            todo_text: todo_item.todo_text,
+                        });
+                        alert("todo updated");
+                    }}>update</button
+                >
             </li>
         {/each}
     </ul>
