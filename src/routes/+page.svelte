@@ -8,6 +8,7 @@
     import {
         addDoc,
         collection,
+        deleteDoc,
         doc,
         onSnapshot,
         query,
@@ -74,6 +75,13 @@
                         alert("todo updated");
                     }}>update</button
                 >
+                <button
+                    on:click={async () => {
+                        await deleteDoc(doc(db, "todos", todo_item.id));
+                    }}
+                >
+                    delete
+                </button>
             </li>
         {/each}
     </ul>
